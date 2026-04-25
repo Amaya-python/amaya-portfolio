@@ -957,49 +957,33 @@ Key Skills: Python, Django, REST APIs, CRM Development, MySQL, PostgreSQL, HTML,
 
   <script>
 
-const stats = document.querySelectorAll('.stat-number');
-let animated = false;
+stats.forEach(stat => {
+  let target = 0;
 
-function animateStats() {
-  const statsSection = document.querySelector('.hero-card');
-  const rect = statsSection.getBoundingClientRect();
-
-  if (rect.top < window.innerHeight && !animated) {
-    animated = true;
-
-    stats.forEach(stat => {
-      let target;
-
-      // Check if it's months-based
-      if (stat.dataset.months) {
-        target = parseInt(stat.dataset.months);
-      } else {
-        target = parseInt(stat.textContent.replace(/\D/g, ''));
-      }
-
-      let current = 0;
-      const increment = target / 50;
-
-      const suffix = stat.dataset.months ? 'mo' :
-                     stat.textContent.includes('+') ? '+' :
-                     stat.textContent.includes('%') ? '%' : '';
-
-      const timer = setInterval(() => {
-        current += increment;
-
-        if (current >= target) {
-          stat.textContent = target + suffix;
-          clearInterval(timer);
-        } else {
-          stat.textContent = Math.floor(current) + suffix;
-        }
-      }, 30);
-    });
+  if (stat.dataset.months && !isNaN(stat.dataset.months)) {
+    target = parseInt(stat.dataset.months);
+  } else {
+    target = parseInt(stat.textContent.replace(/\D/g, '')) || 0;
   }
-}
 
-window.addEventListener('scroll', animateStats);
-animateStats();
+  let current = 0;
+  const increment = target / 50 || 1;
+
+  const suffix = stat.dataset.months ? 'mo' :
+                 stat.textContent.includes('+') ? '+' :
+                 stat.textContent.includes('%') ? '%' : '';
+
+  const timer = setInterval(() => {
+    current += increment;
+
+    if (current >= target) {
+      stat.textContent = target + suffix;
+      clearInterval(timer);
+    } else {
+      stat.textContent = Math.floor(current) + suffix;
+    }
+  }, 30);
+});
     // Typing Animation
     const texts = [
       'Python Full Stack Developer',
