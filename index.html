@@ -708,7 +708,7 @@
                 <div class="stat-label">Projects</div>
               </div>
               <div class="stat-item">
-                <div class="stat-number" data-months="10">0mo</div>
+                <div class="stat-number" data-months="10">10mo</div>
                 <div class="stat-label">Experience</div>
               </div>
               <div class="stat-item">
@@ -957,43 +957,7 @@ Key Skills: Python, Django, REST APIs, CRM Development, MySQL, PostgreSQL, HTML,
 
   <script>
 
-const animateStats = () => {
-  const stats = document.querySelectorAll('.stat-number');
-  const statsSection = document.querySelector('.hero-card');
-  const rect = statsSection.getBoundingClientRect();
 
-  if (rect.top < window.innerHeight && !animated) {
-    animated = true;
-
-    stats.forEach(stat => {
-      let target = 0;
-
-      if (stat.dataset.months) {
-        target = parseInt(stat.dataset.months);
-      } else {
-        target = parseInt(stat.textContent.replace(/\D/g, '')) || 0;
-      }
-
-      let current = 0;
-      const increment = target / 50 || 1;
-
-      const suffix = stat.dataset.months ? 'mo' :
-                     stat.textContent.includes('+') ? '+' :
-                     stat.textContent.includes('%') ? '%' : '';
-
-      const timer = setInterval(() => {
-        current += increment;
-
-        if (current >= target) {
-          stat.textContent = target + suffix;
-          clearInterval(timer);
-        } else {
-          stat.textContent = Math.floor(current) + suffix;
-        }
-      }, 30);
-    });
-  }
-};
     // Typing Animation
     const texts = [
       'Python Full Stack Developer',
