@@ -708,7 +708,7 @@
                 <div class="stat-label">Projects</div>
               </div>
               <div class="stat-item">
-                <div class="stat-number">6mo</div>
+                <div class="stat-number" id="experience-count"></div>
                 <div class="stat-label">Experience</div>
               </div>
               <div class="stat-item">
@@ -956,6 +956,39 @@ Key Skills: Python, Django, REST APIs, CRM Development, MySQL, PostgreSQL, HTML,
   </footer>
 
   <script>
+
+    function calculateExperience() {
+  // Set your real start date here
+  const startDate = new Date("2025-10-01"); // CHANGE THIS
+
+  const now = new Date();
+
+  let months =
+    (now.getFullYear() - startDate.getFullYear()) * 12 +
+    (now.getMonth() - startDate.getMonth());
+
+  if (months < 0) months = 0;
+
+  return months;
+}
+
+function animateExperience() {
+  const element = document.getElementById("experience-count");
+  const target = calculateExperience();
+  let current = 0;
+
+  const timer = setInterval(() => {
+    current++;
+    element.textContent = current + "mo";
+
+    if (current >= target) {
+      clearInterval(timer);
+    }
+  }, 80);
+}
+
+// call it
+animateExperience();
     // Typing Animation
     const texts = [
       'Python Full Stack Developer',
